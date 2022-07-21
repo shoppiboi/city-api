@@ -1,12 +1,9 @@
 import os
 import motor.motor_asyncio
 
-MONGODB_PORT = os.environ.get("MONGODB_PORT")
-MONGODB_HOST = os.environ.get("MONGODB_HOST")
+MONGODB_URI = os.environ.get("MONGODB_URI")
 
-MONGO_DETAILS = f"mongodb://{MONGODB_HOST}:{MONGODB_PORT}"
-
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
+client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URI)
 
 database = client.requests
 request_collection = database.get_collection("requests_collection")
