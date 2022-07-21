@@ -1,7 +1,8 @@
 import os
 import json
+from datetime import datetime
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 import requests
 
@@ -14,6 +15,24 @@ CITY_API_URL = os.environ.get("BACKEND_CITY_API_URL")
 CITY_API_KEY = os.environ.get("BACKEND_CITY_API_KEY")
 
 app = FastAPI()
+
+
+@app.middleware("http")
+def save_request_information(request: Request, call_next):
+
+  request_time = datetime.datetime.now().isoformat()
+  request_browser = request.headers["user-agent"]
+  request_endpoint = request.url.path
+
+  mongo_db_input = {
+    "time": request_time,
+    "browser": request_browser,
+    "endpoint": request_endpoint
+  }
+
+  response = call_next(request)
+
+  return response
 
 
 @app.get("/availableCities")
