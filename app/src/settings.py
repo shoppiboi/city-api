@@ -9,8 +9,8 @@ def load_config():
   environment variables to run app locally
   """
   config_file_paths = [
-      "../environments/local.ini",
-      "../environments/local.secrets.ini",
+      "../../environments/local.ini",
+      "../../environments/local.secrets.ini",
   ]
 
   for config_file_path in config_file_paths:
