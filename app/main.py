@@ -1,6 +1,10 @@
-from fastapi import FastAPI
-
 import os
+import json
+
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+import requests
+
 from settings import load_config
 
 load_config()
@@ -17,4 +21,18 @@ def get_cities():
 
   query_parameters = {"minPopulation": "1000000"}
 
-  return {"Hello": "World!"}
+  headers = {
+    "X-RapidAPI-Key": CITY_API_KEY,
+    "X-RapidAPI-Host": CITY_API_HOST
+  }
+
+  response = requests.request(
+    "GET",
+    CITY_API_URL,
+    headers=headers,
+    params=query_parameters
+  )
+  
+  cities = json.loads(response.text)["data"]
+
+  return JSONResponse(content=cities)
