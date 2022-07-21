@@ -8,9 +8,8 @@ class RequestSchema(BaseModel):
     endpoint: str = None
 
 
-def ResponseModel(data, message):
+def ResponseModel(data):
     return {
         "data": [data],
         "code": 200,
-        "message": message,
     }

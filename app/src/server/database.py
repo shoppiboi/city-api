@@ -1,5 +1,4 @@
 import motor.motor_asyncio
-from requests import request
 
 MONGO_DETAILS = "mongodb://localhost:27017"
 

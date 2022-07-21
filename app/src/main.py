@@ -2,11 +2,12 @@ import os
 import json
 from datetime import datetime
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request 
 from fastapi.responses import JSONResponse
 import requests
 
 from settings import load_config
+from server.routes import router as RequestRouter
 
 load_config()
 
@@ -16,11 +17,12 @@ CITY_API_KEY = os.environ.get("BACKEND_CITY_API_KEY")
 
 app = FastAPI()
 
+app.include_router(RequestRouter, tags=["Request"], prefix="/requests")
 
 @app.middleware("http")
 def save_request_information(request: Request, call_next):
 
-  request_time = datetime.datetime.now().isoformat()
+  request_time = datetime.now().isoformat()
   request_browser = request.headers["user-agent"]
   request_endpoint = request.url.path
 
