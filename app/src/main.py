@@ -1,28 +1,37 @@
+import os
 from datetime import datetime
 
-from fastapi import FastAPI, Request 
+from fastapi import FastAPI, Request
+from server.database import add_request
 
 from server.routes.requests import router as RequestRouter
 from server.routes.cities import router as CityRouter
+
+BACKEND_HOST = os.environ.get("BACKEND_HOST") 
+BACKEND_PORT = os.environ.get("BACKEND_PORT")
 
 app = FastAPI()
 
 app.include_router(RequestRouter, tags=["Request"], prefix="/requests")
 app.include_router(CityRouter, tags=["City"], prefix="/cities")
 
+@app.get("/")
+def root():
+    return {"message": "alive"}
+
 @app.middleware("http")
-def save_request_information(request: Request, call_next):
+async def save_request_information(request: Request, call_next):
 
-  request_time = datetime.now().isoformat()
-  request_browser = request.headers["user-agent"]
-  request_endpoint = request.url.path
-
-  mongo_db_input = {
-    "time": request_time,
-    "browser": request_browser,
-    "endpoint": request_endpoint
+  payload = {
+    "time": datetime.now().isoformat(),
+    "browser": request.headers["user-agent"],
+    "endpoint": request.url.path,
   }
 
-  response = call_next(request)
+  # doesn't really make sense to add an entry for when accessing listRequests
+  if request.url.path != "/requests/listRequests":
+    await add_request(payload)
+
+  response = await call_next(request)
 
   return response
