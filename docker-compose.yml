@@ -6,11 +6,9 @@ services:
     image: mongo:latest
     restart: always
     volumes: 
-      - mongo_db:/data/db
+      - db:/data/db
     ports:
       - "27017:27017"
-    expose:
-      - "27017"
 
   back-end:
     build:
