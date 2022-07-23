@@ -20,7 +20,7 @@
 
 ## Example Usage
 #### `/cities/availableCities`
-![availabeCities](./example_images/availableCities.png)
+![availabeCities](./example-images/availableCities.png)
 - Assumes a minimum population of 1000000
 ```
 [
@@ -98,7 +98,7 @@
 ```
 
 #### `cities/nearbyCities/?city=659`
-![nearbyCities659](./example_images/nearbyCities659.png)
+![nearbyCities659](./example-images/nearbyCities659.png)
 - Assumes a radius of 100 (default value in the API)
 ```
 [
@@ -180,7 +180,7 @@
 ```
 
 #### `requests/listRequests/`
-![listRequests](./example_images/listRequests.png)
+![listRequests](./example-images/listRequests.png)
 ```
 [
   {
