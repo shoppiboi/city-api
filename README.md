@@ -12,9 +12,9 @@
 1. Clone the repo onto your machine
 2. Make your way into the root directory of the project
 3. Run `docker compose up` to get the application up and running
-4. Go to `localhost:8000` and you should be met with:
+4. Go to `0.0.0.0:8000` and you should be met with:
     - `{"message": alive"}`
-5. If you then try to access `http://127.0.0.1:8000/docs` you'll see that we have two specific endpoints where:
+5. If you then try to access `http://0.0.0.0:8000/docs` you'll see that we have two specific endpoints where:
     - `/cities` - endpoint contains all city-related functions
     - and `/requests` - endpoint contains all requests-related functions
 
