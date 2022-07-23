@@ -33,8 +33,8 @@ async def save_request_information(request: Request, call_next):
     "endpoint": request.url.path,
   }
 
-  # doesn't really make sense to add an entry for when accessing listRequests
-  if request.url.path != "/requests/listRequests":
+  # doesn't really make sense to add an entry for the following endpoint calls
+  if request.url.path not in ["/requests/listRequests", "/favicon.ico"]:
     await add_request(payload)
 
   response = await call_next(request)
