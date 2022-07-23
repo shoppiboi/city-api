@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  mongo_db:
+    container_name: mongo_db
+    image: mongo:latest
+    restart: always
+    volumes: 
+      - db:/data/db
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+
+  back-end:
+    build:
+        context: ./back-end
+        dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    links:
+      - mongo_db
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    environment:
+      DEBUG: 1
+      BACKEND_HOST: localhost
+      BACKEND_PORT: "8000"
+      MONGODB_URI: mongodb://mongo_db:27017
+      CITY_API_HOST: wft-geo-db.p.rapidapi.com
+      CITY_API_URL: https://wft-geo-db.p.rapidapi.com/v1/geo/cities
+      CITY_API_KEY: 50131d9318mshefc0fa7453e802ap197a13jsna9c8f4971966
+
+volumes:
+  db:
