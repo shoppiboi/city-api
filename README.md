@@ -4,7 +4,8 @@
 *Naturally in a realistic setting I wouldn't just expose API keys and secrets in a repository. I've done so here to allow whoever is reading this repository to see how and what is being loaded in the `load_config` function in `settings.py`*
 
 ## Features:
-- FastAPI. I thought this might be a nice opportunity to learn and use it!
+- FastAPI - I thought this might be a nice opportunity to learn and use it!
+- MongoDB - For storage of request information
 
 ### How to run the application:
 
