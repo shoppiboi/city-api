@@ -8,19 +8,17 @@
 - MongoDB - For storage of request information
 
 ### How to run the application:
-
-#### 0. Make sure you have `Docker` and `MongoDB` installed and running on your system
-#### 1. Clone the repo onto your machine
-#### 2. Make your way into the root directory of the project
-#### 3. Run `docker compose up` to get the application up and running
-#### 4. Go to `localhost:8000` and you should be met with: `{"message": alive"}`
-#### 5. If you then try to access `http://127.0.0.1:8000/docs`
-  - You'll see that we have two specific endpoints where:
+0. Make sure you have `Docker` and `MongoDB` installed and running on your system
+1. Clone the repo onto your machine
+2. Make your way into the root directory of the project
+3. Run `docker compose up` to get the application up and running
+4. Go to `localhost:8000` and you should be met with:
+    - `{"message": alive"}`
+5. If you then try to access `http://127.0.0.1:8000/docs` you'll see that we have two specific endpoints where:
     - `/cities` - endpoint contains all city-related functions
     - and `/requests` - endpoint contains all requests-related functions
 
 ## Example Usage
-
 #### `/cities/availableCities`
 ![availabeCities](./example_images/availableCities.png)
 - Assumes a minimum population of 1000000
