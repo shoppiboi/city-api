@@ -9,7 +9,9 @@ from server.database import add_request
 from server.routes.requests import router as RequestRouter
 from server.routes.cities import router as CityRouter
 
-if int(os.environ.get("DEBUG")) == 1:
+DEBUG = os.environ.get("DEBUG", None)
+
+if DEBUG and int(DEBUG) == 1:
   load_config()
 
 BACKEND_HOST = os.environ.get("BACKEND_HOST") 
@@ -17,8 +19,8 @@ BACKEND_PORT = os.environ.get("BACKEND_PORT")
 
 app = FastAPI()
 
-app.include_router(RequestRouter, tags=["Request"], prefix="/requests")
-app.include_router(CityRouter, tags=["City"], prefix="/cities")
+app.include_router(RequestRouter, tags=["Requests"], prefix="/requests")
+app.include_router(CityRouter, tags=["Cities"], prefix="/cities")
 
 @app.get("/")
 def root():
